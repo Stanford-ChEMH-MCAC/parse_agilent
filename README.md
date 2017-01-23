@@ -8,17 +8,16 @@ Both exported chromatogram files and exported spectra can be parsed.  This inclu
 ## Requirements
 
 1. R version 3.3 (untested on earlier versions)
-2. tidyverse, including 
-3. magrittr
-4. data.table
+2. [tidyverse](https://github.com/tidyverse/)
+3. [data.table](https://github.com/Rdatatable/data.table)
 
 ## Use
 
 ```
-source(‘<PATH/TO/FILE>/parse_agilent.r`)
+source(‘<PATH/TO/REPO>/source/parse_agilent.r`)
 
 # on chromatograms
-cgrams.df <- parse_agilent_cgram_csv(‘’)
+cgrams.df <- parse_agilent_cgram_csv(‘<PATH/TO/REPO>/data/example_cgram_file.csv’)
 head(cgrams.df)
 
 # on spectra
