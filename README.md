@@ -5,6 +5,13 @@ This repository contains a couple of R functions for parsing the .csv output of 
 
 Both exported chromatogram files and exported spectra can be parsed.  This includes extracted ion chromatograms (EICs), total ion chromatograms (TICs), base peak chromatograms (BPCs), extracted wavelength chromatograms (EWCs), total wavelength chromatograms (TWCs), instrument curves, etc.)
 
+## Requirements
+
+1. R version 3.3 (untested on earlier versions)
+2. tidyverse, including 
+3. magrittr
+4. data.table
+
 ## Use
 
 ```
