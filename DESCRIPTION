@@ -11,6 +11,6 @@ LazyData: true
 RoxygenNote: 5.0.1
 Imports:
     tidyverse,
-    magrittr
-    stringr
-    data.table
+    magrittr,
+    stringr,
+    data.table,
