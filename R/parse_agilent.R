@@ -5,6 +5,8 @@
 #' 
 #' @export
 parse_agilent_cgram_csv <- function(filename){
+	require(stringr)
+	require(data.table)
     raw.text <- readLines(filename)
     n.lines <- length(raw.text)
     
@@ -63,7 +65,9 @@ parse_agilent_cgram_csv <- function(filename){
 #' 
 #' @export
 parse_agilent_spectrum_csv <- function(filename){
-        raw.text <- readLines(filename)
+	require(stringr)
+	require(data.table)
+    raw.text <- readLines(filename)
     n.lines <- length(raw.text)
     
     # header lines start with '#' and come in pairs;
