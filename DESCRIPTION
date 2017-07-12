@@ -1,6 +1,6 @@
 Package: parse.agilent
-Title: Parse the Oddly-Formatted .csv Files Exported from Agilent's MassHunter Software
-Version: 0.0.0.9000
+Title: Parse the oddly-Formatted .csv Files Exported from Agilent's MassHunter Software
+Version: 0.1.0.9000
 Authors@R: person("Curt", "Fischer", email = "curt.r.fischer@gmail.com", role = c("aut", "cre"))
 Description: This package contains a couple of R functions for parsing the .csv output of Agilent’s MassHunter software and returning the results as data frame.  If you export chromatograms and/or spectra from MassHunter as .csv or .txt files, and you would like to get the resulting data into R for analysis or visualization, this package may be useful to you.
 Depends:
@@ -9,3 +9,8 @@ License: Gnu GPL3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 5.0.1
+Imports:
+    tidyverse,
+    magrittr
+    stringr
+    data.table

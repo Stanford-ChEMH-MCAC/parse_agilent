@@ -1,8 +1,3 @@
-require(tidyverse)  # for use of the . function
-require(magrittr)  # for the %<>% operator
-require(stringr)  # for easy string manipulation
-require(data.table)  # for fast .csv parsing with fread
-
 #' Parse the oddly formatted .csv files exported by Agilent's MassHunter software into an R data frame.
 #'
 #' @param filename A string with the path of the relevant .csv file.
