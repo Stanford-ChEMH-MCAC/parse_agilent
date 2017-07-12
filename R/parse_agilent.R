@@ -1,7 +1,7 @@
 #' Parse the oddly formatted .csv files exported by Agilent's MassHunter software into an R data frame.
 #'
 #' @param filename A string with the path of the relevant .csv file.
-#' @return A data frame with columns "V2", "V3", "file" and "intensity"
+#' @return A data frame with columns "file", "metadata", "time" and "intensity".
 #' 
 #' @export
 parse_agilent_cgram_csv <- function(filename){
@@ -10,7 +10,7 @@ parse_agilent_cgram_csv <- function(filename){
     
     # header lines start with '#' and come in pairs;
     # the first line has metadata and the second has actual headers
-    header.lines <- str_detect(raw.text, '[#]') %>% which
+    header.lines <- which(str_detect(raw.text, '[#]'))
     data.lines <- !str_detect(raw.text, '[#]')
 	
 	# reformat for use of the much-faster data.table::fread() function
@@ -29,7 +29,7 @@ parse_agilent_cgram_csv <- function(filename){
     data.starts <- header.starts + 2
     data.ends <- c(header.starts[2:num.headers] - 1, n.lines)
     
-    # now must adjust for line numbering in filtered data
+    # adjust for line numbering in filtered data
     data.lengths <- data.ends - data.starts + 1
     new.ends <- cumsum(data.lengths)
     new.starts <- c(1, new.ends[1:(num.headers-1)] + 1)
@@ -37,14 +37,14 @@ parse_agilent_cgram_csv <- function(filename){
 	# add metadata by block
 	metadata <- raw.text[header.starts[seq_along(new.starts)]]
 	
+	# attempt to parse the metadata
 	this.file <- str_extract(metadata, "[:graph:]+[.]d")
 	signal <- str_extract(metadata, "[-]ESI|[/+]ESI|DAD|[-]Mixed|[/+]Mixed|Pressure|[+]APCI")
-	mzs <- str_extract(metadata, "(EIC|APCI)[:12 ]*[(].*[)]")
+	mzs <- str_extract(metadata, "(EIC|APCI|MRM)[:12 ]*[(].*[)]")
 	
+	# fill in each block with parsed metadata
 	n.blocks <- length(data.lengths)
-
 	block.idxs <- rep(1:n.blocks, data.lengths)
-
 	raw.df$metadata <- metadata[block.idxs]
 	raw.df$file <- this.file[block.idxs]
 	raw.df$signal <- signal[block.idxs]
@@ -68,7 +68,7 @@ parse_agilent_spectrum_csv <- function(filename){
     
     # header lines start with '#' and come in pairs;
     # the first line has metadata and the second has actual headers
-    header.lines <- str_detect(raw.text, '[#]') %>% which
+    header.lines <- which(str_detect(raw.text, '[#]'))
     data.lines <- !str_detect(raw.text, '[#]')
 	
 	# reformat for use of the much-faster data.table::fread() function
