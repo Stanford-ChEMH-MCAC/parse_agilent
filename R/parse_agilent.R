@@ -54,7 +54,7 @@ parse_agilent_cgram_csv <- function(filename){
 	raw.df$metadata <- metadata[block.idxs]
 	
     # rename data colums
-    names(raw.df)[1:3] <- c('time', 'intensity')	
+    names(raw.df)[1:2] <- c('time', 'intensity')	
     return(raw.df)
 }
 
@@ -114,6 +114,6 @@ parse_agilent_spectrum_csv <- function(filename){
 	raw.df$metadata <- metadata[block.idxs]
 	
     # rename data colums
-    names(raw.df)[1:3] <- c('mz', 'intensity')	
+    names(raw.df)[1:2] <- c('mz', 'intensity')	
     return(raw.df)
 }
